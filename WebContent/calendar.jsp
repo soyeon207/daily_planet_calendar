@@ -33,6 +33,7 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ['interaction', 'dayGrid'],
         header: {
+        	
           left: 'prevYear,prev,next,nextYear today',
           center: 'title',
           right: 'dayGridMonth,dayGridWeek,dayGridDay'
@@ -42,10 +43,35 @@
         editable: true,
         eventLimit: true, // allow "more" link when too many events
         events: [
-          {
-            title: cal_title[1],
-            start: cal_start[1]
-          }
+          
+        	  /* title:'Test',
+				start: '2019-05-01',
+				end: '2019-05-03' */
+        	  <%
+          	String select_title = "select * from calendar";
+          	
+          	try{
+          		pstmt = conn.prepareStatement(select_title);
+          		rs = pstmt.executeQuery();
+          		while(rs.next()){
+          			if(rs.getInt("cnt")!=1){
+          			%>
+          			,
+          			<%
+          			}
+          			%>
+          			{
+          				title:'<%=rs.getString("content")%>',
+          				start: '<%=rs.getString("start_date")%>',
+          				end:'<%=rs.getString("end_date")%>'
+          			}
+          			<%
+          		}
+          	}catch(Exception e) {
+          		
+          	}
+          	%> 
+          
         ]
       });
 
@@ -94,29 +120,7 @@
       <button type="submit">일정 등록하기</button>
     </form>
   </div>
-  <script>
 
-    $('form').on('submit', function (event) {
-
-      var $start = $(this).find('#start_cal');
-      var $end = $(this).find('#end_cal');
-      var $content = $(this).find('#content_cal');
-
-      var start = $start.val();
-      var end = $end.val();
-      var content = $content.val();
-      <%
-      	Test();
-      %>
-      cal_title[0] = content;
-      cal_start[0] = start;
-      cal_end[0] = end;
-		
-      calendar.render();
-      event.preventDefault();
-      cal_num++;
-    });
-  </script>
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-bright" id="navbar">
     <a class="navbar-brand" href="index.html">

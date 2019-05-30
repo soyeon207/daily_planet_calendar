@@ -33,6 +33,7 @@
 
 <%!
 
+
 	public void insertCal(String start,String end,String content) {
 		String insertcal = "insert into calendar (content,start_date,end_date) value (?, ?, ?)";
 		System.out.println("insertCal");

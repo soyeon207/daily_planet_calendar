@@ -13,7 +13,8 @@
 	String start = request.getParameter("start");
 	String end = request.getParameter("end");
 	String content = request.getParameter("content");
-	
+
+	System.out.println(start+" "+end+" "+content);
 	insertCal(start,end,content);
 	
 %>
