@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="calendarDAO.jsp"%>
 <!DOCTYPE html>
 <html>
 
@@ -79,17 +80,16 @@
 </head>
 
 <body>
-
   <div id='calendar'></div>
   <input type="button" value="일정 추가" id="btn">
   <div id="dia_rs" style="display:none">
-    <form style="display: hidden">
+    <form style="display: hidden" action="calendarProc.jsp" method="post">
       start :
-      <input type="date" id="start_cal">
+      <input type="date" name="start" >
       <br> end :
-      <input type="date" id="end_cal">
+      <input type="date" name="end">
       <br> content :
-      <input type="text" id="content_cal">
+      <input type="text" name="content">
       <br>
       <button type="submit">일정 등록하기</button>
     </form>
@@ -105,32 +105,13 @@
       var start = $start.val();
       var end = $end.val();
       var content = $content.val();
-
+      <%
+      	Test();
+      %>
       cal_title[0] = content;
       cal_start[0] = start;
       cal_end[0] = end;
-
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: ['interaction', 'dayGrid'],
-        header: {
-          left: 'prevYear,prev,next,nextYear today',
-          center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay'
-        },
-        defaultDate: y,
-        navLinks: true, // can click day/week names to navigate views
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [
-          {
-            title: cal_title[cal_num],
-            start: cal_start[cal_num],
-            end: cal_end[cal_num]
-          }
-        ]
-      });
-
+		
       calendar.render();
       event.preventDefault();
       cal_num++;
