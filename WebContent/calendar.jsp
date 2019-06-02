@@ -7,6 +7,16 @@
 <head>
   <meta charset='utf-8' />
 
+<style>
+td.fc-event-container{
+	background-color:yellow;
+	border-radius: 25px;
+}
+div>span{
+	color:orange;
+	background-color:red;
+}
+</style>
   <link rel='stylesheet' href='css/calendar_core_main.css'/>
   <link rel='stylesheet' href='css/calendar_daygrid_main.css'/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"crossorigin="anonymous">
