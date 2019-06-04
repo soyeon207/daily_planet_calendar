@@ -34,8 +34,8 @@
 <%!
 
 
-	public void insertCal(String start,String end,String content) {
-		String insertcal = "insert into calendar (content,start_date,end_date) value (?, ?, ?)";
+	public void insertCal(String start,String end,String content,String title) {
+		String insertcal = "insert into calendar (content,start_date,end_date,cal_title) value (?, ?, ?,?)";
 		System.out.println("insertCal");
 		try{ 
 			
@@ -43,6 +43,7 @@
 			pstmt.setString(1,content); 
 			pstmt.setString(2,start); 
 			pstmt.setString(3,end);
+			pstmt.setString(4,title);
 			
 			pstmt.executeUpdate(); 
 			System.out.println("Inserting calendar Successfully!"); 

@@ -8,14 +8,23 @@
   <meta charset='utf-8' />
 
 <style>
+body{
+	background-image: url('img/back.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 td.fc-event-container{
-	background-color:yellow;
+	background-color:white;
 	border-radius: 25px;
+	margin:20px;
+	opacity:0.5;
+	
 }
 div>span{
-	color:orange;
-	background-color:red;
+	color:black;
 }
+
+
 </style>
   <link rel='stylesheet' href='css/calendar_core_main.css'/>
   <link rel='stylesheet' href='css/calendar_daygrid_main.css'/>
@@ -29,6 +38,7 @@ div>span{
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
   <script>
+  
     var cal_title = new Array();
     var cal_start = new Array();
     var cal_end = new Array();
@@ -58,6 +68,7 @@ div>span{
 				start: '2019-05-01',
 				end: '2019-05-03' */
         	  <%
+        	String c_t;
           	String select_title = "select * from calendar";
           	
           	try{
@@ -71,7 +82,7 @@ div>span{
           			}
           			%>
           			{
-          				title:'<%=rs.getString("content")%>',
+          				title:'<%=rs.getString("cal_title")+", "+rs.getString("content")%>',
           				start: '<%=rs.getString("start_date")%>',
           				end:'<%=rs.getString("end_date")%>'
           			}
@@ -89,21 +100,35 @@ div>span{
     });
 
     $(function () {
-      $("#btn").click(function () {
+    	$(".fc-content").click(function() {
+    		System.out.println("제발");
+    	});
+    	$("#btn").click(function () {
         $("#dia_rs").dialog({
           title: "일정 추가하기",
           width: 800,
           modal: true,
         });
-      })
+      });
     });
 
 
   </script>
   <style>
+  .fc-content{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.fc-content:hover{
+	overflow:visible;
+	color:white;
+}
     body {
-      margin: 90px 10px;
+      margin-top:90px;
       padding: 0;
+      color:white;
       font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
       font-size: 14px;
     }
@@ -124,7 +149,9 @@ div>span{
       <input type="date" name="start" >
       <br> end :
       <input type="date" name="end">
-      <br> content :
+      <br> title :
+      <input type="text" name="title">
+      <br> content : 
       <input type="text" name="content">
       <br>
       <button type="submit">일정 등록하기</button>

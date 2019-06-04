@@ -619,9 +619,9 @@ Docs & License: https://fullcalendar.io/
             );
             this.el.innerHTML =
                 '<div class="fc-header ' + theme.getClass('popoverHeader') + '">' +
-                    '<span class="fc-title">' +
+                    '<marquee class="fc-title">' +
                     core.htmlEscape(title) +
-                    '</span>' +
+                    '</marquee>' +
                     '<span class="fc-close ' + theme.getIconClass('close') + '"></span>' +
                     '</div>' +
                     '<div class="fc-body ' + theme.getClass('popoverContent') + '">' +

@@ -13,15 +13,11 @@
 	String start = request.getParameter("start");
 	String end = request.getParameter("end");
 	String content = request.getParameter("content");
-
-	
-	//System.out.println(end.substring(9)+1);
-	 end = Integer.toString(iend+1);
-	System.out.println(iend+1);
+	String title = request.getParameter("title");
 	
 	System.out.println(end);
 	System.out.println(start+" "+end+" "+content);
-	insertCal(start,end,content); 
+	insertCal(start,end,content,title); 
 	
 %>
 <jsp:forward page="calendar.jsp"></jsp:forward>
