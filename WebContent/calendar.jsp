@@ -129,11 +129,18 @@ div>span{
           modal: true,
         });
       });
+    	
+    	$(".modify").click(function() {
+    		$(".h1").css("display","inline-block");
+    		$(".h2").css("display","inline-block");
+    		$(".h3").css("display","inline-block");
+    		$(".modify").css("display","none");
+    		$(".s1").css("display","none");
+    		$(".s2").css("display","none");
+    	});
     });
 
-	function content_click(){
-		
-	}
+	
   </script>
   <style>
   .fc-content{
@@ -166,11 +173,12 @@ div>span{
   <input type="button" value="일정 추가" id="btn">
   
   <div id="dia_conent" style="display:none">
-	<form>
-	title : <%=title %><br>
-    content : <%=content %>
-    
+	<form action="calendarUpdate.jsp" method="post">
+	제목 : <span class="s1"><%=title %></span><input type="text" value="<%=title %>" class="h1" style="display:none"><br>
+    내용 : <span class="s2"><%=content %></span><input type="text" value="<%=title %>" class="h2" style="display:none"><br>
+    <button type="submit" class="h3" style="display:none">일정 수정하기</button>
 	</form>
+	<button class="modify">일정 수정하기</button>
  </div>
  
   <div id="dia_rss" style="display:none">
