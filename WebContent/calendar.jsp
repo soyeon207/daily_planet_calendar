@@ -90,6 +90,8 @@ div>span{
 				start: '2019-05-01',
 				end: '2019-05-03' */
         	  <%
+        	  
+        	
         	String c_t;
           	String select_title = "select * from calendar";
           	
@@ -97,6 +99,7 @@ div>span{
           		pstmt = conn.prepareStatement(select_title);
           		rs = pstmt.executeQuery();
           		while(rs.next()){
+          			
           			if(rs.getInt("cnt")!=1){
           			%>
           			,
@@ -123,7 +126,7 @@ div>span{
 
     $(function () {
     	$("#btn").click(function () {
-        $("#dia_conent").dialog({
+        $("#dia_rs").dialog({
           title: "일정 추가하기",
           width: 800,
           modal: true,
@@ -182,7 +185,7 @@ div>span{
 	<button class="modify">일정 수정하기</button>
  </div>
  
-  <div id="dia_rss" style="display:none">
+  <div id="dia_rs" style="display:none">
     <form style="display: hidden" action="calendarProc.jsp" method="post">
       start :
       <input type="date" name="start" >

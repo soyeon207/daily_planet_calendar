@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="calendarDAO.jsp"%>
@@ -12,6 +14,10 @@
 	request.setCharacterEncoding("UTF-8");
 	String start = request.getParameter("start");
 	String end = request.getParameter("end");
+	Date date = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+	date.setDate(date.getDate()+1);
+	
+	end = new SimpleDateFormat("yyyy-MM-dd").format(date);
 	String content = request.getParameter("content");
 	String title = request.getParameter("title");
 	
