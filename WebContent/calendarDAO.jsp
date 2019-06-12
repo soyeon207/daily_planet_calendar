@@ -57,6 +57,20 @@
 		}
 	}
 
+	public int count() {
+		String count = "select * from calendar";
+		int cnt =0;
+		try{
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(count);
+			while(rs.next()){
+				cnt++;
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return cnt;
+	}
 	public String SearchData(int cnt){
 		String SearchData = "select * from calendar where cnt = "+cnt;
 		String contents="";

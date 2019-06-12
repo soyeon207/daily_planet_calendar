@@ -10,9 +10,12 @@
 </head>
 <body>
 <%
-	String cnt = request.getParameter("cnt");
-
-	String content = SearchData(Integer.parseInt(cnt));
+	int cnt = Integer.parseInt(request.getParameter("cnt"));
+	int count = count();
+	if(cnt>count){
+		cnt = cnt%count+1;
+	}
+	String content = SearchData(cnt);
 	
 	
 	String[] c = content.split(",");
