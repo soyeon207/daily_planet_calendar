@@ -190,6 +190,7 @@
         function SimpleDayGridEventRenderer() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
+        var txt =0;
         // Builds the HTML to be used for the default element for an individual segment
         SimpleDayGridEventRenderer.prototype.renderSegHtml = function (seg, mirrorInfo) {
             var options = this.context.options;
@@ -205,6 +206,7 @@
             var timeHtml = '';
             var timeText;
             var titleHtml;
+            txt++;
             
             classes.unshift('fc-day-grid-event', 'fc-h-event');
             // Only display a timed events time if it is the starting segment
@@ -215,7 +217,7 @@
                 }
             }
             titleHtml =
-                '<span class="fc-title" onclick="content_click(this)">' +
+                '<span class="fc-title" onclick="content_click(this)" id='+txt+'>' +
                     (core.htmlEscape(eventDef.title || '') || '&nbsp;') + // we always want one line of height
                     '</span>';
             return '<a class="' + classes.join(' ') + '"' +

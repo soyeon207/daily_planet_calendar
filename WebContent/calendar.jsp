@@ -206,8 +206,8 @@ $(function () {
 	});
 	
 });
-function content_click(t){
-	alert($(t).text());
+function content_click(test){
+	alert(document.getElementById(test.getAttribute('id')).getAttribute('id'));
     
 }
 </script>
