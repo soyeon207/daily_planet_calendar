@@ -1,3 +1,4 @@
+<%@page import="com.mysql.fabric.Response"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
@@ -31,7 +32,21 @@
 %>
 
 <%!
+	public void UpdateCal(int cnt,String title,String content){
+		String UpdateCal = "update calendar set cal_title=? ,content=? where cnt="+cnt;
+		try{
+			pstmt = conn.prepareStatement(UpdateCal); 
+			pstmt.setString(1,title);
+			pstmt.setString(2,content);
+			pstmt.executeUpdate(); 
+			pstmt.close(); 
+			conn.close();
+		}catch(Exception e){
+			e.getMessage();
+			
+		}
 
+	}
 
 	public void insertCal(String start,String end,String content,String title) {
 		String insertcal = "insert into calendar (content,start_date,end_date,cal_title) value (?, ?, ?,?)";

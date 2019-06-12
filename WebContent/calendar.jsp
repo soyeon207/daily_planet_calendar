@@ -40,7 +40,7 @@ div>span{
  	<%
  	request.setCharacterEncoding("utf-8");
  	
-
+	String cnt2 = request.getParameter("cnt");
  	String title = request.getParameter("title");
  	String content = request.getParameter("content");
  	System.out.println(title+" "+content);
@@ -174,8 +174,9 @@ div>span{
   
   <div id="dia_conent" style="display:none">
 	<form action="calendarUpdate.jsp" method="post">
-	제목 : <span class="s1"><%=title %></span><input type="text" value="<%=title %>" class="h1" style="display:none"><br>
-    내용 : <span class="s2"><%=content %></span><input type="text" value="<%=title %>" class="h2" style="display:none"><br>
+	<input type="hidden" name="cnt" value="<%=cnt2 %>">
+	제목 : <span class="s1"><%=title %></span><input name="title" type="text" value="<%=title %>" class="h1" style="display:none"><br>
+         내용 : <span class="s2"><%=content %></span><input name="content" type="text" value="<%=content %>" class="h2" style="display:none"><br>
     <button type="submit" class="h3" style="display:none">일정 수정하기</button>
 	</form>
 	<button class="modify">일정 수정하기</button>

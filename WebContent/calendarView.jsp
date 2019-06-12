@@ -23,7 +23,7 @@
 %>
 <script>
 
-	 location.href="calendar.jsp?title="+encodeURI("<%=c[0]%>"  , "UTF-8")+"&content="+encodeURI("<%=c[1]%>"  , "UTF-8"); 
+	 location.href="calendar.jsp?title="+encodeURI("<%=c[0]%>"  , "UTF-8")+"&content="+encodeURI("<%=c[1]%>"  , "UTF-8")+"&cnt=<%=cnt%>"; 
 </script>
 
 </body>
