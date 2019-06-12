@@ -206,8 +206,9 @@ $(function () {
 	});
 	
 });
-function content_click(txt){
-    alert(txt);
+function content_click(t){
+	alert($(t).text());
+    
 }
 </script>
 </html>

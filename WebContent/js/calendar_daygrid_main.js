@@ -181,7 +181,7 @@
         };
         return Popover;
     }());
-
+    var txt=0;
     /* Event-rendering methods for the DayGrid class
     ----------------------------------------------------------------------------------------------------------------------*/
     // "Simple" is bad a name. has nothing to do with SimpleDayGrid
@@ -205,7 +205,7 @@
             var timeHtml = '';
             var timeText;
             var titleHtml;
-            var txt='a';
+            
             classes.unshift('fc-day-grid-event', 'fc-h-event');
             // Only display a timed events time if it is the starting segment
             if (seg.isStart) {
@@ -215,7 +215,7 @@
                 }
             }
             titleHtml =
-                '<span class="fc-title">' +
+                '<span class="fc-title" onclick="content_click(this)">' +
                     (core.htmlEscape(eventDef.title || '') || '&nbsp;') + // we always want one line of height
                     '</span>';
             return '<a class="' + classes.join(' ') + '"' +
@@ -226,8 +226,9 @@
                     ' style="' + skinCss + '"' :
                     '') +
                 '>' +
-                '<div class="fc-content" onclick="content_click(txt)">' +
+                '<div class="fc-content" >' +
                 (options.dir === 'rtl' ?
+                       
                     titleHtml + ' ' + timeHtml : // put a natural space in between
                     timeHtml + ' ' + titleHtml //
                 ) +
