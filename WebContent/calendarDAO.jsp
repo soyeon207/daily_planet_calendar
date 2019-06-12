@@ -49,23 +49,21 @@
 	}
 
 	public void ai_setting(){
-		String ai_setting = "ALTER TABLE calendar AUTO_INCREMENT=1";
-		String ai_setting2 = "SET @COUNT=0";
-		String ai_setting3 = "UPDATE calendar SET id = @COUNT:=@COUNT+1";
+		String ai_setting = "ALTER TABLE daily_planet.calendar AUTO_INCREMENT = 1";
+		String ai_setting2 = "SET @COUNT=0 UPDATE calendar SET cnt = @COUNT:=@COUNT+1";
 
 		try{
 			pstmt = conn.prepareStatement(ai_setting);
 			pstmt.executeUpdate();
-			pstmt = conn.prepareStatement(ai_setting2);
-			pstmt.executeUpdate();
-			pstmt = conn.prepareStatement(ai_setting3);
-			pstmt.executeUpdate();
+			/* pstmt = conn.prepareStatement(ai_setting2);
+			pstmt.executeUpdate(); */
 			pstmt.close(); 
 			conn.close(); 
 		}catch(Exception e) {
 			e.getMessage();
 		}
 	}
+	
 	public void deleteCal(int cnt) {
 		String deleteCal = "delete from calendar where cnt = "+cnt;
 		try{

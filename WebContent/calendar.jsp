@@ -46,7 +46,6 @@ div>span{
  	System.out.println(title+" "+content);
  	
  	if(title!=null){
- 		System.out.println("실행되는데ㅜ");
  	%>
  	
  	$(function () {
@@ -172,8 +171,9 @@ div>span{
 </head>
 
 <body>
-  <div id='calendar'></div>
-  <button type="button" value="일정 추가" id="btn"><img src="img/add_cal.png" style=""></img></button>
+  <div id='calendar' style="position:absolute;margin-left: auto;margin-right: auto;left: 0;right: 0;"></div>
+  <img src="img/add_cal.png" style="width:260px;height:200px;position:absolute;top:250px" id="btn">
+
   
   <div id="dia_conent" style="display:none">
 	<form action="calendarUpdate.jsp" method="post">
