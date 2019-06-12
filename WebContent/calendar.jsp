@@ -173,7 +173,7 @@ div>span{
 
 <body>
   <div id='calendar'></div>
-  <input type="button" value="일정 추가" id="btn">
+  <button type="button" value="일정 추가" id="btn"><img src="img/add_cal.png" style=""></img></button>
   
   <div id="dia_conent" style="display:none">
 	<form action="calendarUpdate.jsp" method="post">
@@ -183,6 +183,7 @@ div>span{
     <button type="submit" class="h3" style="display:none">일정 수정하기</button>
 	</form>
 	<button class="modify">일정 수정하기</button>
+	<button onclick="delete_date(<%=cnt2%>)">일정 삭제</button>
  </div>
  
   <div id="dia_rs" style="display:none">
@@ -196,7 +197,7 @@ div>span{
       <br> content : 
       <input type="text" name="content">
       <br>
-      <button type="submit">일정 등록하기</button>
+      <button type="submit" >일정 추가하기</button>
     </form>
   </div>
 
@@ -209,7 +210,7 @@ div>span{
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" style="color:white">
       <ul class="navbar-nav">
         <!-- <li class="nav-item active">
                 <a class="nav-link" href="#">picture diary
@@ -242,7 +243,9 @@ div>span{
 function content_click(test){
 	//window.open("calendarView.jsp?cnt="+document.getElementById(test.getAttribute('id')).getAttribute('id') , "newWindow", "width=300, height=400, scrollbars=no,toolbar=no,location=no,status=no,fullscreen=no");
 	location.href = "calendarView.jsp?cnt="+document.getElementById(test.getAttribute('id')).getAttribute('id');
-
+}
+function delete_date(a) {
+	location.href="calendarDelete.jsp?cnt="+a;
 }
 </script>
 </html>
