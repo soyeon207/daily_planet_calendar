@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <style>
 .fc-content{
 	white-space:nowrap;
@@ -15,14 +17,22 @@
 	overflow:visible;
 }
 </style>
+
+<script>
+$(function () {
+	$(".fc-view-container").click(function() {
+		alert('a');
+	});
+	
+});
+	
+</script>
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-	<div>
-		<div class="fc-content" style="width:100px;background-color:orange;color:white;">
-			<span>dffsdfasdfsdfd</span>
-		</div>
+<div class="calendar">
+	<div class="fc-view-container">
+	dfsdfdf
 	</div>
 </div>
 </body>

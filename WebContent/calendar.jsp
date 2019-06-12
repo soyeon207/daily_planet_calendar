@@ -14,14 +14,12 @@ body{
 	background-repeat: no-repeat;
 }
 td.fc-event-container{
-	background-color:white;
+	background-color:#898999;
 	border-radius: 25px;
-	margin:20px;
-	opacity:0.5;
-	
+	margin:20px;	
 }
 div>span{
-	color:black;
+	color:white;
 }
 
 
@@ -33,12 +31,12 @@ div>span{
   
   <script src='js/calendar_core_main.js'></script>
   <script src='js/calendar_daygrid_main.js'></script>
-  <script src='js/calendar_interaction_main.js'></script>
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
   <script>
   
+ 	
     var cal_title = new Array();
     var cal_start = new Array();
     var cal_end = new Array();
@@ -100,9 +98,11 @@ div>span{
     });
 
     $(function () {
-    	$(".fc-content").click(function() {
-    		System.out.println("제발");
-    	});
+    	
+    	
+    	
+    	
+    	
     	$("#btn").click(function () {
         $("#dia_rs").dialog({
           title: "일정 추가하기",
@@ -112,7 +112,9 @@ div>span{
       });
     });
 
-
+	function content_click(){
+		
+	}
   </script>
   <style>
   .fc-content{
@@ -196,5 +198,16 @@ div>span{
     </div>
   </nav>
 </body>
-
+<script>
+$(function () {
+	$(".fc-left").css("background-color","orange");
+	$("input").click(function() {
+		alert('a');
+	});
+	
+});
+function content_click(txt){
+    alert(txt);
+}
+</script>
 </html>
