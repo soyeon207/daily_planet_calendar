@@ -1,9 +1,8 @@
-<%@page import="com.mysql.fabric.Response"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="com.mysql.jdbc.Statement"%>
 <%@page import="java.sql.Connection"%>
 <meta charset='utf-8' />
 <%!
@@ -56,6 +55,22 @@
 		finally{
 			System.out.println("연결은 됨");
 		}
+	}
+
+	public String SearchData(int cnt){
+		String SearchData = "select * from calendar where cnt = "+cnt;
+		String contents="";
+		try{
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SearchData);
+			while(rs.next()){
+				contents = rs.getString("cal_title") +","+rs.getString("content");
+			}
+
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return contents;
 	}
 
 %>

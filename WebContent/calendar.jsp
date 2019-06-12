@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="calendarDAO.jsp"%>
@@ -36,7 +37,30 @@ div>span{
 
   <script>
   
+ 	<%
+ 	request.setCharacterEncoding("utf-8");
  	
+
+ 	String title = request.getParameter("title");
+ 	String content = request.getParameter("content");
+ 	System.out.println(title+" "+content);
+ 	
+ 	if(title!=null){
+ 		System.out.println("실행되는데ㅜ");
+ 	%>
+ 	
+ 	$(function () {
+ 		$(window).load(function() {
+        $("#dia_conent").dialog({
+          title: "일정 확인하기",
+          width: 800,
+          modal: true,
+        });
+      });
+    });
+ 		<%
+ 	}
+ 	%>
     var cal_title = new Array();
     var cal_start = new Array();
     var cal_end = new Array();
@@ -80,7 +104,7 @@ div>span{
           			}
           			%>
           			{
-          				title:'<%=rs.getString("cal_title")+", "+rs.getString("content")%>',
+          				title:'<%=rs.getString("cal_title")%>',
           				start: '<%=rs.getString("start_date")%>',
           				end:'<%=rs.getString("end_date")%>'
           			}
@@ -98,13 +122,8 @@ div>span{
     });
 
     $(function () {
-    	
-    	
-    	
-    	
-    	
     	$("#btn").click(function () {
-        $("#dia_rs").dialog({
+        $("#dia_conent").dialog({
           title: "일정 추가하기",
           width: 800,
           modal: true,
@@ -145,7 +164,16 @@ div>span{
 <body>
   <div id='calendar'></div>
   <input type="button" value="일정 추가" id="btn">
-  <div id="dia_rs" style="display:none">
+  
+  <div id="dia_conent" style="display:none">
+	<form>
+	title : <%=title %><br>
+    content : <%=content %>
+    
+	</form>
+ </div>
+ 
+  <div id="dia_rss" style="display:none">
     <form style="display: hidden" action="calendarProc.jsp" method="post">
       start :
       <input type="date" name="start" >
@@ -199,16 +227,10 @@ div>span{
   </nav>
 </body>
 <script>
-$(function () {
-	$(".fc-left").css("background-color","orange");
-	$("input").click(function() {
-		alert('a');
-	});
-	
-});
 function content_click(test){
-	alert(document.getElementById(test.getAttribute('id')).getAttribute('id'));
-    
+	//window.open("calendarView.jsp?cnt="+document.getElementById(test.getAttribute('id')).getAttribute('id') , "newWindow", "width=300, height=400, scrollbars=no,toolbar=no,location=no,status=no,fullscreen=no");
+	location.href = "calendarView.jsp?cnt="+document.getElementById(test.getAttribute('id')).getAttribute('id');
+
 }
 </script>
 </html>

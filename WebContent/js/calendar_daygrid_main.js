@@ -217,7 +217,7 @@
                 }
             }
             titleHtml =
-                '<span class="fc-title" onclick="content_click(this)" id='+txt+'>' +
+                '<span class="fc-title" >' +
                     (core.htmlEscape(eventDef.title || '') || '&nbsp;') + // we always want one line of height
                     '</span>';
             return '<a class="' + classes.join(' ') + '"' +
@@ -228,7 +228,7 @@
                     ' style="' + skinCss + '"' :
                     '') +
                 '>' +
-                '<div class="fc-content" >' +
+                '<div class="fc-content" onclick="content_click(this)" id='+txt+'>' +
                 (options.dir === 'rtl' ?
                        
                     titleHtml + ' ' + timeHtml : // put a natural space in between
