@@ -11,6 +11,7 @@
     };
 
     function __extends(d, b) {
+    	
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -46,7 +47,8 @@
     */
     var PointerDragging = /** @class */ (function () {
         function PointerDragging(containerEl) {
-        	
+ 
+
             var _this = this;
             this.subjectEl = null;
             this.downEl = null;
@@ -74,16 +76,21 @@
                     document.addEventListener('mouseup', _this.handleMouseUp);
                 }
             };
+            //움직이기
             this.handleMouseMove = function (ev) {
                 var pev = _this.createEventFromMouse(ev);
                 _this.recordCoords(pev);
+                
                 _this.emitter.trigger('pointermove', pev);
             };
+            //check
             this.handleMouseUp = function (ev) {
                 document.removeEventListener('mousemove', _this.handleMouseMove);
                 document.removeEventListener('mouseup', _this.handleMouseUp);
                 _this.emitter.trigger('pointerup', _this.createEventFromMouse(ev));
+                
                 _this.cleanup(); // call last so that pointerup has access to props
+                //console.f(ev.pageX+ev.pageY);
             };
             // Touch
             // ----------------------------------------------------------------------------------------------------
@@ -114,6 +121,7 @@
                 _this.emitter.trigger('pointermove', pev);
             };
             this.handleTouchEnd = function (ev) {
+               	
                 if (_this.isDragging) { // done to guard against touchend followed by touchcancel
                     var target = ev.target;
                     target.removeEventListener('touchmove', _this.handleTouchMove);
@@ -124,10 +132,12 @@
                     _this.cleanup(); // call last so that pointerup has access to props
                     _this.isTouchDragging = false;
                     startIgnoringMouse();
+                    
                 }
             };
             this.handleTouchScroll = function () {
                 _this.wasTouchScroll = true;
+                
             };
             this.handleScroll = function (ev) {
                 if (!_this.shouldIgnoreMove) {
@@ -137,7 +147,7 @@
                         origEvent: ev,
                         isTouch: _this.isTouchDragging,
                         subjectEl: _this.subjectEl,
-                        pageX: pageX,
+                        pageX: pageX, //툴팁의 좌표를 설정
                         pageY: pageY,
                         deltaX: pageX - _this.origPageX,
                         deltaY: pageY - _this.origPageY
@@ -169,11 +179,13 @@
             return false;
         };
         PointerDragging.prototype.cleanup = function () {
+        	
             isWindowTouchMoveCancelled = false;
             this.isDragging = false;
             this.subjectEl = null;
             this.downEl = null;
-            // keep wasTouchScroll around for later access
+            //console.log("a");
+            // keep wasTouchScroll around for later access 보관하고 있었다.나중에 액세스하려면 스크롤
             this.destroyScrollWatch();
         };
         PointerDragging.prototype.querySubjectEl = function (ev) {
@@ -187,7 +199,7 @@
         PointerDragging.prototype.shouldIgnoreMouse = function () {
             return ignoreMouseDepth || this.isTouchDragging;
         };
-        // can be called by user of this class, to cancel touch-based scrolling for the current drag
+        // can be called by user of this class, to cancel touch-based scrolling for the current drag 현재 드래그에 대한 터치 기반 스크롤을 취소하려면 이 클래스의 사용자가 호출할 수 있음
         PointerDragging.prototype.cancelTouchScroll = function () {
             if (this.isDragging) {
                 isWindowTouchMoveCancelled = true;
@@ -228,6 +240,7 @@
                 deltaX = ev.pageX - this.origPageX;
                 deltaY = ev.pageY - this.origPageY;
             }
+            //console.log("pageX"+ev.pageX);
             return {
                 origEvent: ev,
                 isTouch: false,
@@ -236,7 +249,9 @@
                 pageY: ev.pageY,
                 deltaX: deltaX,
                 deltaY: deltaY
+                
             };
+            
         };
         PointerDragging.prototype.createEventFromTouch = function (ev, isFirst) {
             var touches = ev.touches;
@@ -249,6 +264,7 @@
             if (touches && touches.length) {
                 pageX = touches[0].pageX;
                 pageY = touches[0].pageY;
+               
             }
             else {
                 pageX = ev.pageX;
@@ -272,6 +288,7 @@
                 deltaX: deltaX,
                 deltaY: deltaY
             };
+          
         };
         return PointerDragging;
     }());
@@ -356,10 +373,12 @@
             }
         };
         // always async
+        //끝
         ElementMirror.prototype.stop = function (needsRevertAnimation, callback) {
             var _this = this;
             var done = function () {
                 _this.cleanup();
+                console.log("done");
                 callback();
             };
             if (needsRevertAnimation &&
@@ -840,6 +859,7 @@
                 if (!this.pointer.wasTouchScroll || this.touchScrollAllowed) {
                     this.isDragging = true;
                     this.mirrorNeedsRevert = false;
+                    
                     this.autoScroller.start(ev.pageX, ev.pageY);
                     this.emitter.trigger('dragstart', ev);
                     if (this.touchScrollAllowed === false) {
@@ -1136,6 +1156,7 @@
     constituted by a drag over date cells, with a possible delay at the beginning of the drag.
     */
     var DateSelecting = /** @class */ (function (_super) {
+    	
         __extends(DateSelecting, _super);
         function DateSelecting(settings) {
             var _this = _super.call(this, settings) || this;
@@ -1158,6 +1179,7 @@
                 var isInvalid = false;
                 if (hit) {
                     dragSelection = joinHitsIntoSelection(_this.hitDragging.initialHit, hit, calendar.pluginSystem.hooks.dateSelectionTransformers);
+                  
                     if (!dragSelection || !_this.component.isDateSelectionValid(dragSelection)) {
                         isInvalid = true;
                         dragSelection = null;
@@ -1210,31 +1232,7 @@
         }
         return delay;
     }
-    function joinHitsIntoSelection(hit0, hit1, dateSelectionTransformers) {
-        var dateSpan0 = hit0.dateSpan;
-        var dateSpan1 = hit1.dateSpan;
-        var ms = [
-            dateSpan0.range.start,
-            dateSpan0.range.end,
-            dateSpan1.range.start,
-            dateSpan1.range.end
-        ];
-        ms.sort(core.compareNumbers);
-        var props = {};
-        for (var _i = 0, dateSelectionTransformers_1 = dateSelectionTransformers; _i < dateSelectionTransformers_1.length; _i++) {
-            var transformer = dateSelectionTransformers_1[_i];
-            var res = transformer(hit0, hit1);
-            if (res === false) {
-                return null;
-            }
-            else if (res) {
-                __assign(props, res);
-            }
-        }
-        props.range = { start: ms[0], end: ms[3] };
-        props.allDay = dateSpan0.allDay;
-        return props;
-    }
+    	
 
     var EventDragging = /** @class */ (function (_super) {
         __extends(EventDragging, _super);
@@ -1397,10 +1395,12 @@
                                 var transformer = _a[_i];
                                 __assign(eventDropArg, transformer(_this.validMutation, initialCalendar_1));
                             }
+                            
                             __assign(eventDropArg, {
                                 el: ev.subjectEl,
                                 delta: _this.validMutation.startDelta,
                                 oldEvent: eventApi,
+                                
                                 event: new core.EventApi(// the data AFTER the mutation
                                 initialCalendar_1, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null),
                                 revert: function () {
@@ -1539,6 +1539,7 @@
                 // means date1 is already start-of-day,
                 // but date0 needs to be converted
                 date0 = core.startOfDay(date0);
+                alert(date0);
             }
         }
         var delta = core.diffDates(date0, date1, hit0.component.dateEnv, hit0.component === hit1.component ?
@@ -1547,11 +1548,14 @@
         if (delta.milliseconds) { // has hours/minutes/seconds
             standardProps.allDay = false;
         }
+        
         var mutation = {
+        		
             startDelta: delta,
             endDelta: delta,
             standardProps: standardProps
         };
+        //startDelta
         for (var _i = 0, massagers_1 = massagers; _i < massagers_1.length; _i++) {
             var massager = massagers_1[_i];
             massager(mutation, hit0, hit1);
@@ -1671,6 +1675,7 @@
                         type: 'MERGE_EVENTS',
                         eventStore: mutatedRelevantEvents
                     });
+                    
                     calendar.publiclyTrigger('eventResize', [
                         {
                             el: _this.draggingSeg.el,
@@ -1688,6 +1693,7 @@
                             jsEvent: ev.origEvent,
                             view: view
                         }
+                        
                     ]);
                 }
                 else {
@@ -1722,6 +1728,7 @@
     function computeMutation(hit0, hit1, isFromStart, instanceRange, transforms) {
         var dateEnv = hit0.component.dateEnv;
         var date0 = hit0.dateSpan.range.start;
+        alert(data0);
         var date1 = hit1.dateSpan.range.start;
         var delta = core.diffDates(date0, date1, dateEnv, hit0.component.largeUnit);
         var props = {};
@@ -1738,6 +1745,7 @@
         if (isFromStart) {
             if (dateEnv.add(instanceRange.start, delta) < instanceRange.end) {
                 props.startDelta = delta;
+                alert(delta);
                 return props;
             }
         }
@@ -1934,7 +1942,8 @@
     }());
     // Utils for computing event store from the DragMeta
     // ----------------------------------------------------------------------------------------------------
-    function computeEventForDateSpan(dateSpan, dragMeta, calendar) {
+    /*function computeEventForDateSpan(dateSpan, dragMeta, calendar) {
+    	alert("a");
         var defProps = __assign({}, dragMeta.leftoverProps);
         for (var _i = 0, _a = calendar.pluginSystem.hooks.externalDefTransforms; _i < _a.length; _i++) {
             var transform = _a[_i];
@@ -1952,8 +1961,9 @@
             calendar.dateEnv.add(start, dragMeta.duration) :
             calendar.getDefaultEventEnd(dateSpan.allDay, start);
         var instance = core.createEventInstance(def.defId, { start: start, end: end });
+        alert(start);
         return { def: def, instance: instance };
-    }
+    }*/
     // Utils for extracting data from element
     // ----------------------------------------------------------------------------------------------------
     function getDragMetaFromEl(el) {
@@ -2035,6 +2045,7 @@
                 if (!_this.shouldIgnoreMove) {
                     // fire dragstart right away. does not support delay or min-distance
                     _this.emitter.trigger('dragstart', ev);
+                    alert(ev);
                 }
             };
             _this.handlePointerMove = function (ev) {
@@ -2077,6 +2088,7 @@
                 if (mirrorEl) {
                     this.currentMirrorEl = mirrorEl;
                     mirrorEl.style.visibility = 'hidden';
+                    alert(mirrorEl);
                 }
             }
         };
@@ -2131,5 +2143,5 @@
     exports.default = main;
 
     Object.defineProperty(exports, '__esModule', { value: true });
-
+   
 }));
