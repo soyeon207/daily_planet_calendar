@@ -32,6 +32,7 @@ div>span{
   
   <script src='js/calendar_core_main.js'></script>
   <script src='js/calendar_daygrid_main.js'></script>
+  <script src='js/calendar_interaction_main.js'></script>
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
