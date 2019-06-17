@@ -27,6 +27,7 @@ div>span{
 </style>
   <link rel='stylesheet' href='css/calendar_core_main.css'/>
   <link rel='stylesheet' href='css/calendar_daygrid_main.css'/>
+  <link rel='stylesheet' href='css/top.css'/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"crossorigin="anonymous">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
   
