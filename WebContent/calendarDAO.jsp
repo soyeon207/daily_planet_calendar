@@ -1,3 +1,4 @@
+<%@page import="com.mysql.fabric.Response"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
@@ -12,7 +13,7 @@
 	ResultSet rs = null;
 %>
 <%
-	String url ="jdbc:mysql://localhost:3305/daily_planet?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC";
+	String url ="jdbc:mysql://localhost:3306/daily_planet?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC";
 	String user="daily_planet";
 	String pw="mirim12345!";
 	
@@ -48,16 +49,12 @@
 	}
 
 	public void ai_setting(){
-		String ai_setting = "ALTER TABLE daily_planet.calendar AUTO_INCREMENT = 1";
-		String ai_setting2 = "SET @COUNT=0 UPDATE calendar SET cnt = @COUNT:=@COUNT+1";
+		String ai_setting = "ALTER TABLE calendar AUTO_INCREMENT = 1";
 
 		try{
 			pstmt = conn.prepareStatement(ai_setting);
 			pstmt.executeUpdate();
-			/* pstmt = conn.prepareStatement(ai_setting2);
-			pstmt.executeUpdate(); */
 			pstmt.close(); 
-			conn.close(); 
 		}catch(Exception e) {
 			e.getMessage();
 		}
