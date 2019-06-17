@@ -11,11 +11,11 @@
 <body>
 <%
 	int cnt = Integer.parseInt(request.getParameter("cnt"));
-	int count = count();
+	/* int count = count();
 	if(cnt>count){
 		cnt = cnt%count+1;
-	}
-	String content = SearchData(cnt);
+	} */
+	String content = SearchData(cnt+1);
 	
 	
 	String[] c = content.split(",");
