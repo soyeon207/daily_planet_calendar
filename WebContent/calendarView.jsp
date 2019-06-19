@@ -10,21 +10,18 @@
 </head>
 <body>
 <%
-	int cnt = Integer.parseInt(request.getParameter("cnt"));
-	/* int count = count();
-	if(cnt>count){
-		cnt = cnt%count+1;
-	} */
-	String content = SearchData(cnt+1);
-	
-	
+	String cnt = request.getParameter("cnt");
+	System.out.println("cnt : "+cnt);
+	String content = SearchData(cnt);
+	System.out.println("content : "+content);
 	String[] c = content.split(",");
+	
 
 %>
 <script>
 
 	 location.href="calendar.jsp?title="+encodeURI("<%=c[0]%>"  , "UTF-8")+"&content="+encodeURI("<%=c[1]%>"  , "UTF-8")+"&cnt=<%=cnt%>"; 
-</script>
+</script> 
 
 </body>
 </html>
