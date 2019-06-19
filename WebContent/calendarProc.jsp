@@ -19,8 +19,9 @@
 	
 	end = new SimpleDateFormat("yyyy-MM-dd").format(date);
 	String content = request.getParameter("content");
-	String title = request.getParameter("title");
 	
+	String title = request.getParameter("title");
+	title= title.replace(" ", "");
 	System.out.println(end);
 	System.out.println(start+" "+end+" "+content);
 	insertCal(start,end,content,title); 
