@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="calendarDAO.jsp"%>
     
@@ -12,7 +12,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String cnt = request.getParameter("cnt");
-	deleteCal(Integer.parseInt(cnt));
+	deleteCal(cnt);
 	ai_setting();
 %>
 <jsp:forward page="calendar.jsp"></jsp:forward>
