@@ -32,8 +32,8 @@
 %>
 
 <%!
-	public void UpdateCal(int cnt,String title,String content){
-		String UpdateCal = "update calendar set cal_title=? ,content=? where cnt="+cnt;
+	public void UpdateCal(String cnt,String title,String content){
+		String UpdateCal = "update calendar set cal_title=? ,content=? where cal_title='"+cnt+"'";
 		try{
 			pstmt = conn.prepareStatement(UpdateCal); 
 			pstmt.setString(1,title);
@@ -60,8 +60,8 @@
 		}
 	}
 	
-	public void deleteCal(int cnt) {
-		String deleteCal = "update calendar set start_date=?,end_date=? where cnt="+cnt;
+	public void deleteCal(String cnt) {
+		String deleteCal = "update calendar set start_date=?,end_date=? where cal_title='"+cnt+"'";
 		try{
 			pstmt = conn.prepareStatement(deleteCal);
 			pstmt.setString(1,"2001-06-12");
@@ -99,7 +99,7 @@
 
 	public int count() {
 		String count = "select * from calendar";
-		int cnt =0;
+		int cnt=0;
 		try{
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(count);
@@ -111,8 +111,10 @@
 		}
 		return cnt;
 	}
-	public String SearchData(int cnt){
-		String SearchData = "select * from calendar where cnt = "+cnt;
+	
+	
+	public String SearchData(String cnt){
+		String SearchData = "select * from calendar where cal_title='"+cnt+"'";
 		String contents="";
 		try{
 			stmt = conn.createStatement();
